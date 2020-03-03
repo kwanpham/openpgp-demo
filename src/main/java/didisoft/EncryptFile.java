@@ -1,5 +1,6 @@
 package didisoft;
 
+import com.didisoft.pgp.PGPException;
 import com.didisoft.pgp.PGPLib;
 
 public class EncryptFile {
@@ -13,10 +14,14 @@ public class EncryptFile {
         // set to true for compatibility with GnuPG 2.2.8+
         boolean withIntegrityCheck = false;
 
-        pgp.encryptFile("INPUT.txt",
-                "DCC1BD015C9C4A78086B10D3171008177430C9B9.asc",
-                "OUTPUT.pgp",
-                asciiArmor,
-                withIntegrityCheck);
+        try {
+            pgp.encryptFile("INPUT.txt",
+                    "DCC1BD015C9C4A78086B10D3171008177430C9B9.asc",
+                    "OUTPUT.pgp",
+                    asciiArmor,
+                    withIntegrityCheck);
+        } catch (PGPException e) {
+            e.printStackTrace();
+        }
     }
 }
